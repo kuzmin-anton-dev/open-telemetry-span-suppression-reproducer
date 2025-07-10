@@ -1,12 +1,12 @@
 package kuzmin.opentelemetry
 
-import io.opentelemetry.instrumentation.annotations.WithSpan
+import io.opentelemetry.api.trace.Tracer
 import org.springframework.stereotype.Component
-import io.opentelemetry.api.trace.SpanKind
 
 @Component
-class Service(private val client: Client) {
+class Service(private val client: Client, private val tracer: Tracer) {
 
-    @WithSpan(kind = SpanKind.CLIENT)
-    fun performOperation() = client.performOperation()
+    fun performOperation() = tracer.withNewSpan("Service.performOperation") {
+        client.performOperation()
+    }
 }
