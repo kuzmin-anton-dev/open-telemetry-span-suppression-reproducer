@@ -24,6 +24,7 @@ val agent = configurations.create("agent")
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:2.17.0")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -32,6 +33,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("com.redis:testcontainers-redis:2.2.2")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

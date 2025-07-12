@@ -1,6 +1,8 @@
 package kuzmin.opentelemetry
 
+import com.redis.testcontainers.RedisContainer
 import org.springframework.boot.test.context.TestConfiguration
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection
 import org.springframework.context.annotation.Bean
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.wait.strategy.Wait
@@ -11,6 +13,10 @@ class TestContainersConfiguration {
 
     @Bean
     fun jaegerContainer() = JaegerContainer(DockerImageName.parse("jaegertracing/all-in-one:1.68.0"))
+
+    @Bean
+    @ServiceConnection
+    fun redisContainer() = RedisContainer(DockerImageName.parse("redis:8.0.3"))
 
     class JaegerContainer(imageName: DockerImageName) : GenericContainer<JaegerContainer>(imageName) {
 
